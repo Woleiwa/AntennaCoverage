@@ -4,7 +4,7 @@ from scipy.spatial import voronoi_plot_2d
 
 import random
 if __name__ == '__main__':
-    pool = SwimmingPool(25, 50, 12.6)
+    pool = SwimmingPool(25, 50, 13)
 
     """for i in range(0, 40):
         x = random.random() * 25
@@ -19,10 +19,10 @@ if __name__ == '__main__':
         else:
             y = 50
         pool.add_points(x, y)"""
-    pool.add_points(0, 0)
-    pool.add_points(0, 50)
-    pool.add_points(25, 0)
-    pool.add_points(25, 50)
+    pool.add_points(0, 25)
+    pool.add_points(25, 25)
+    pool.add_points(12.5, 0)
+    pool.add_points(12.5, 50)
     pool.generate_voronoi()
     voronoi_plot_2d(pool.voronoi)
     plt.show()
@@ -57,5 +57,10 @@ if __name__ == '__main__':
         pool.add_points(x, y)
         pool.generate_voronoi()
         judge, point = pool.is_covered()
-    voronoi_plot_2d(pool.voronoi)
+    fig, ax = plt.subplots()
+    rectangle = plt.Rectangle((0, 0), 25, 50, edgecolor='red', facecolor='none')
+    ax.add_patch(rectangle)
+    voronoi_plot_2d(pool.voronoi, ax)
+    ax.set_xlim(-10, 60)
+    ax.set_ylim(-10, 60)
     plt.show()
